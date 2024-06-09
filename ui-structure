@@ -1,0 +1,13 @@
+- header:
+    - navigation bar
+        - search
+        - logo
+        - account
+    - image of movie (panonama)
+- Movies:
+    - Top movies
+    - Latest movies
+- Series:
+    - Top series
+    - Latest series
+- Footer:
