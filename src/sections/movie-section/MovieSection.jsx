@@ -1,116 +1,90 @@
 import { useEffect, useState } from "react";
-import { fetchPopularMovies, fetchTrendings, fetchSerieDetails, fetchMovieDetails } from "../../services/themoviedbApi";
+import { 
+    fetchPopularMovies, 
+    fetchTrendings, 
+    fetchSerieDetails, 
+    fetchMovieDetails, 
+    fetchCombinedNewReleases } from "../../services/themoviedbApi";
 import styles from './MovieSection.module.css';
 
 function MovieSection() {
-    const [popMovies, setPopMovies] = useState([]);
-    const [trendings, setTrendings] = useState([]);
+    const [sections, setSections] = useState([
+        { title: 'Popular Movies', data: [], fetchFunction: fetchPopularMovies },
+        { title: 'Trending Now', data: [], fetchFunction: fetchTrendings },
+        { title: 'New Releases', data: [], fetchFunction: fetchCombinedNewReleases},
+    ]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchMovies = async () => {
+        const fetchDataForSection = async (section) => {
             try {
-                const popMovies = await fetchPopularMovies();
-                setPopMovies(popMovies);
-                
+                const data = await section.fetchFunction();
+                setSections(prevSections => prevSections.map(prevSection => {
+                    if (prevSection.title === section.title) {
+                        return { ...prevSection, data: data };
+                    }
+                    return prevSection;
+                }));
             } catch (error) {
                 setError(error);                
-            };
-        }
-        fetchMovies();
-    }, []);
+            }
+        };
 
-    useEffect(() => {
-        const getTrendings = async () => {
-            try {
-                const trendings = await fetchTrendings();
-                setTrendings(trendings);
-                
-            } catch (error) {
-                setError(error);                
-            };
-        }
-        getTrendings();
-    }, []);
-    
+        sections.forEach(section => {
+            if (section.data.length === 0) {
+                fetchDataForSection(section);
+            }
+        });
+    }, [sections]);
 
-    const fetchMovieDetailById = async (tmdbId) => {
-        const data = await fetchMovieDetails(tmdbId);
-        console.log(data);
-    }
-
-    const fetchSerieDetailById = async (tmdbId) => {
-        const data = await fetchSerieDetails(tmdbId);
-        console.log(data);
-    }
-
-    const onclickCard = async (tmdbId, mediaType) => {
-    
+    const fetchDetailById = async (tmdbId, mediaType) => {
         try {
             if (mediaType === 'movie') {
-                const response = await fetchMovieDetailById(tmdbId);
+                const response = await fetchMovieDetails(tmdbId);
+                console.log(response);
             } else {
-                const response = await fetchSerieDetailById(tmdbId);
+                const response = await fetchSerieDetails(tmdbId);
+                console.log(response);
             }
         } catch (error) {
             console.error(`Error fetching details: ${error}`);
         }
     };
 
+    const onClickCard = (tmdbId, mediaType) => {
+        fetchDetailById(tmdbId, mediaType);
+    };
+
+    const renderSection = (section) => (
+        <div key={section.title} className={styles.movieContainer}>
+            {section.data.length > 0 && (
+                <div className={styles.firstItem} onClick={() => onClickCard(section.data[0].id, section.data[0].media_type)}>
+                    <img src={`https://image.tmdb.org/t/p/original${section.data[0].backdrop_path}`} alt={section.data[0].title} />
+                    <div className={styles.overlayText}>
+                        <h1>{section.data[0].title}</h1>
+                        <p>{section.data[0].overview}</p>
+                    </div>
+                </div>
+            )}
+
+            <h2>{section.title}</h2>
+
+            <ul className={styles.moviesGrid}>
+                {section.data.slice(1).map(item => (
+                    <img
+                        key={item.id}
+                        onClick={() => onClickCard(item.id, item.media_type)}
+                        src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                        alt={item.title}
+                    />
+                ))}
+            </ul>
+        </div>
+    );
+
     return (
         <>
-            <div className={styles.movieContainer}>
-                {popMovies.length > 0 && (
-                    <div className={styles.firstItem} onClick={() => onclickCard(popMovies[0].id, popMovies[0].media_type)}>
-                        <img src={`https://image.tmdb.org/t/p/original${popMovies[0].backdrop_path}`} alt={popMovies[0].title} />
-                        <div className={styles.overlayText}>
-                            <h1>{popMovies[0].name}</h1>
-                            <p>{popMovies[0].overview}</p>
-                        </div>
-                    </div>
-                )}
-                
-                <h2>Popular Movies</h2>
-
-                <ul className={styles.moviesGrid}>
-                    {popMovies.slice(1).map(movie => (
-                        <img
-                            key={movie.id}
-                            onClick={() => onclickCard(movie.id, movie.media_type)}
-                            src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                            alt={movie.title}
-                        />
-                    ))}
-                </ul>
-
-            </div>
-
-
-            <div className={styles.movieContainer}>
-                {trendings.length > 0 && (
-                    <div className={styles.firstItem} onClick={() => onclickCard(trendings[0].id, trendings[0].media_type)}>
-                        <img src={`https://image.tmdb.org/t/p/original${trendings[0].backdrop_path}`} alt={trendings[0].title} />
-                        <div className={styles.overlayText}>
-                            <h1>{trendings[0].title}</h1>
-                            <p>{trendings[0].overview}</p>
-                        </div>
-                    </div>
-                )}
-                
-                <h2>Trending Now</h2>
-
-                <ul className={styles.moviesGrid}>
-                    {trendings.slice(1).map(trending => (
-                        <img
-                            key={trending.id}
-                            onClick={() => onclickCard(trending.id, trending.media_type)}
-                            src={`https://image.tmdb.org/t/p/original${trending.backdrop_path}`}
-                            alt={trending.title}
-                        />
-                    ))}
-                </ul>
-
-            </div>
+            {sections.map(section => renderSection(section))}
         </>
     );
 }
