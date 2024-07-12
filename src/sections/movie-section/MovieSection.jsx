@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { fetchPopularMovies } from "../../services/themoviedbApi";
-import VidSrcCard from "../../components/MovieCard/VidSrcCard";
+import { fetchPopularMovies, fetchTrendings, fetchSerieDetails, fetchMovieDetails } from "../../services/themoviedbApi";
 import styles from './MovieSection.module.css';
 
 function MovieSection() {
     const [popMovies, setPopMovies] = useState([]);
+    const [trendings, setTrendings] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -19,7 +19,44 @@ function MovieSection() {
         }
         fetchMovies();
     }, []);
+
+    useEffect(() => {
+        const getTrendings = async () => {
+            try {
+                const trendings = await fetchTrendings();
+                setTrendings(trendings);
+                
+            } catch (error) {
+                setError(error);                
+            };
+        }
+        getTrendings();
+    }, []);
     
+
+    const fetchMovieDetailById = async (tmdbId) => {
+        const data = await fetchMovieDetails(tmdbId);
+        console.log(data);
+    }
+
+    const fetchSerieDetailById = async (tmdbId) => {
+        const data = await fetchSerieDetails(tmdbId);
+        console.log(data);
+    }
+
+    const onclickCard = async (tmdbId, mediaType) => {
+    
+        try {
+            if (mediaType === 'movie') {
+                const response = await fetchMovieDetailById(tmdbId);
+            } else {
+                const response = await fetchSerieDetailById(tmdbId);
+            }
+        } catch (error) {
+            console.error(`Error fetching details: ${error}`);
+        }
+    };
+
     return (
         <>
             <div className={styles.movieContainer}>
@@ -27,7 +64,7 @@ function MovieSection() {
                     <div className={styles.firstItem} onClick={() => onclickCard(popMovies[0].id, popMovies[0].media_type)}>
                         <img src={`https://image.tmdb.org/t/p/original${popMovies[0].backdrop_path}`} alt={popMovies[0].title} />
                         <div className={styles.overlayText}>
-                            <h1>{popMovies[0].title}</h1>
+                            <h1>{popMovies[0].name}</h1>
                             <p>{popMovies[0].overview}</p>
                         </div>
                     </div>
@@ -75,7 +112,6 @@ function MovieSection() {
 
             </div>
         </>
-
     );
 }
 
