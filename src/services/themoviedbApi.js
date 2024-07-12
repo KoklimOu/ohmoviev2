@@ -84,6 +84,19 @@ export const fetchActionMovies = async () => {
   }
 };
 
+export const fetchAnimeContent = async () => {
+  try {
+    const response = await axiosInstance.get('/discover/tv', {
+      params: {
+        with_original_language: 'ja',
+      },
+    });
+    return response.data.results;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const fetchMovieDetails = async (tmdbId) => {
   try {
     const response = await axiosInstance.get(`/movie/${tmdbId}`);

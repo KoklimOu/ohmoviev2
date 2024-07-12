@@ -6,7 +6,7 @@ import {
     fetchMovieDetails, 
     fetchCombinedNewReleases, 
     fetchActionMovies,
-     } from "../../services/themoviedbApi";
+    fetchAnimeContent } from "../../services/themoviedbApi";
 import styles from './MovieSection.module.css';
 
 function MovieSection() {
@@ -15,6 +15,7 @@ function MovieSection() {
         { title: 'Trending Now', data: [], fetchFunction: fetchTrendings },
         { title: 'New Releases', data: [], fetchFunction: fetchCombinedNewReleases},
         { title: 'Action', data: [], fetchFunction: fetchActionMovies },
+        { title: 'Anime', data: [], fetchFunction: fetchAnimeContent }
     ]);
     const [error, setError] = useState(null);
 
