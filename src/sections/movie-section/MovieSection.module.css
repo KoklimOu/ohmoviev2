@@ -9,14 +9,16 @@
 .firstItem {
     position: relative;
     width: 100%;
+    height: 80vh;
     cursor: pointer;
-    margin-bottom: 16px;
+    overflow: hidden;
 }
 
 .firstItem img {
     width: 100%;
     height: auto;
     opacity: 50%;
+    object-fit: cover;
 }
 
 .overlayText {
@@ -61,6 +63,9 @@
 
 
 @media (max-width: 1500px) {
+    .firstItem {
+        height: auto;
+    }
     .moviesGrid{
         grid-template-columns: repeat(5, 1fr);
     }
