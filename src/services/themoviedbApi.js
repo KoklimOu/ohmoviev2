@@ -51,11 +51,34 @@ export const fetchCombinedNewReleases = async () => {
     const movies = await fetchNewMovieReleases();
     const tvShows = await fetchNewTVShowReleases();
 
-    // Combine movies and TV shows into a single array
     const combinedResults = [...movies, ...tvShows];
 
-    // Return the first 20 items (or less if there aren't enough)
     return combinedResults.slice(0, 20);
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchActionGenreId = async () => {
+  try {
+    const response = await axiosInstance.get('/genre/movie/list');
+    const genres = response.data.genres;
+    const actionGenre = genres.find(genre => genre.name.toLowerCase() === 'action');
+    return actionGenre.id;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchActionMovies = async () => {
+  try {
+    const genreId = await fetchActionGenreId();
+    const response = await axiosInstance.get('/discover/movie', {
+      params: {
+        with_genres: genreId,
+      },
+    });
+    return response.data.results;
   } catch (error) {
     throw error;
   }
