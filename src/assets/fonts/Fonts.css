@@ -1,0 +1,21 @@
+/* src/assets/fonts/Fonts.css */
+@font-face {
+    font-family: 'Lora-Bold';
+    src: url('./Lora-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lora Medium';
+    src: url('./Lora-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lora-Regular';
+    src: url('./Lora-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
