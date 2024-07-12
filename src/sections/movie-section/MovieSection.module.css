@@ -1,19 +1,38 @@
+.movieContainer{
+    padding: 0 16px;
+}
 ul {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     margin: 0;
     padding: 0;
+    gap: 8px;
 }
+
+ul img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease; 
+    opacity: 90%;
+    border-radius: 1px;
+}
+
+ul img:hover {
+    cursor: pointer;
+    transform: scale(1.03); 
+    box-shadow: 0 0 0 2px var(--border_color);
+}
+
 
 @media (max-width: 1500px) {
     ul{
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(5, 1fr);
     }
 }
 
 
 @media (max-width: 768px) {
     ul{
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { fetchPopularMovies } from "../../services/themoviedbApi";
-import VidSrcCard from "../../components/MovieCard/VidSrcCard";
 import styles from './MovieSection.module.css';
 
 function MovieSection() {
@@ -20,12 +19,19 @@ function MovieSection() {
         fetchMovies();
     }, []);
     
+
+    const onclickMovie = (id) => {
+        console.log(id);
+        alert(id);
+    }
+
     return (
-        <div>
+        <div className={styles.movieContainer}>
+            <h2>Popular Movies</h2>
             <ul>
-            {popMovies.map(movie => (
-                <VidSrcCard key={movie.id} movie={movie}/>
-            ))}
+                {popMovies.map(movie => (
+                    <img key={movie.id} onClick={() => onclickMovie(movie.id)} src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={movie.title} />
+                ))}
             </ul>
         </div>
     );
