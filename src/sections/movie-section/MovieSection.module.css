@@ -1,0 +1,19 @@
+ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 1500px) {
+    ul{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+@media (max-width: 768px) {
+    ul{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
