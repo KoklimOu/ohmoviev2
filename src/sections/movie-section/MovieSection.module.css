@@ -1,23 +1,59 @@
 .movieContainer{
     padding: 0 16px;
 }
-ul {
+
+.movieContainer h2 {
+    margin-top: 5%;
+}
+
+.firstItem {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+.firstItem img {
+    width: 100%;
+    height: auto;
+    opacity: 50%;
+}
+
+.overlayText {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+}
+.overlayText h1 {
+    font-size: 55px;
+}
+
+.overlayText p {
+    width: 55%;
+    font-size: 30px;
+}
+
+.moviesGrid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     margin: 0;
     padding: 0;
-    gap: 8px;
+    gap: 16px;
 }
 
-ul img {
+.moviesGrid img {
     width: 100%;
     height: auto;
-    transition: transform 0.3s ease; 
+    cursor: pointer;
+    transition: all ease 0.3s;
     opacity: 90%;
     border-radius: 1px;
 }
 
-ul img:hover {
+.moviesGrid img:hover {
     cursor: pointer;
     transform: scale(1.03); 
     box-shadow: 0 0 0 2px var(--border_color);
@@ -25,14 +61,48 @@ ul img:hover {
 
 
 @media (max-width: 1500px) {
-    ul{
+    .moviesGrid{
         grid-template-columns: repeat(5, 1fr);
+    }
+    .overlayText h1 {
+        font-size: 35px;
+    }
+    
+    .overlayText p {
+        font-size: 20px;
     }
 }
 
 
-@media (max-width: 768px) {
-    ul{
+@media (max-width: 950px) {
+    .moviesGrid{
         grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+    }
+    .movieContainer h2 {
+        font-size: 23px;
+    }
+    .overlayText h1 {
+        font-size: 25px;
+    }
+    
+    .overlayText p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .moviesGrid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .movieContainer h2 {
+        font-size: 17px;
+    }
+    .overlayText h1 {
+        font-size: 18px;
+    }
+    
+    .overlayText p {
+        font-size: 14px;
     }
 }
