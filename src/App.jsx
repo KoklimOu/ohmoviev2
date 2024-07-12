@@ -1,10 +1,11 @@
 import './App.css'
+import MovieSection from './sections/movie-section/MovieSection'
 
 function App() {
 
   return (
     <>
-      <h1>Hello there</h1>
+     <MovieSection/>
     </>
   )
 }
