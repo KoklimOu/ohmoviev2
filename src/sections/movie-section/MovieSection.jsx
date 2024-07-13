@@ -75,6 +75,9 @@ function MovieSection() {
 
     const renderSection = (section) => (
         <div key={section.title} className={styles.movieContainer}>
+
+            <div className={styles.sectionSaperator}></div>
+
             {section.data.length > 0 && (
                 <div className={styles.firstItem} onClick={() => onClickCard(section.data[0].id, section.data[0].media_type)}>
                     <img src={`https://image.tmdb.org/t/p/original${section.data[0].backdrop_path}`} alt={section.data[0].title || section.data[0].name} />

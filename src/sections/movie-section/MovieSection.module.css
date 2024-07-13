@@ -3,7 +3,7 @@
 }
 
 .movieContainer h2 {
-    margin-top: 5%;
+    margin-top:32px;
 }
 
 .firstItem {
@@ -61,6 +61,9 @@
     box-shadow: 0 0 0 2px var(--border_color);
 }
 
+.sectionSaperator {
+    margin-top: 5%;
+}
 
 @media (max-width: 1500px) {
     .firstItem {
