@@ -59,23 +59,11 @@ export const fetchCombinedNewReleases = async () => {
   }
 };
 
-export const fetchActionGenreId = async () => {
+export const fetchMoviesByGenre = async (genre) => {
   try {
-    const response = await axiosInstance.get('/genre/movie/list');
-    const genres = response.data.genres;
-    const actionGenre = genres.find(genre => genre.name.toLowerCase() === 'action');
-    return actionGenre.id;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const fetchActionMovies = async () => {
-  try {
-    const genreId = await fetchActionGenreId();
     const response = await axiosInstance.get('/discover/movie', {
       params: {
-        with_genres: genreId,
+        with_genres: genre,
       },
     });
     return response.data.results;
@@ -83,6 +71,7 @@ export const fetchActionMovies = async () => {
     throw error;
   }
 };
+
 
 export const fetchAnimeContent = async () => {
   try {

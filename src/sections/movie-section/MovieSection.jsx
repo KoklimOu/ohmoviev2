@@ -5,34 +5,45 @@ import {
     fetchSerieDetails, 
     fetchMovieDetails, 
     fetchCombinedNewReleases, 
-    fetchActionMovies,
     fetchAnimeContent,
-    fetchKoreanContent } from "../../services/themoviedbApi";
+    fetchKoreanContent,
+    fetchMoviesByGenre } from "../../services/themoviedbApi";
 import styles from './MovieSection.module.css';
+import { MOVIE_GENRES } from "../../utils/genre";
 
 function MovieSection() {
     const [sections, setSections] = useState([
-        { title: 'Anime', data: [], fetchFunction: fetchAnimeContent },
-        { title: 'K-drama', data: [], fetchFunction: fetchKoreanContent },
-        { title: 'Popular Movies', data: [], fetchFunction: fetchPopularMovies },
-        { title: 'Trending Now', data: [], fetchFunction: fetchTrendings },
-        { title: 'New Releases', data: [], fetchFunction: fetchCombinedNewReleases},
-        { title: 'Action', data: [], fetchFunction: fetchActionMovies },
+        { title: 'Anime', data: [], fetchFunction: fetchAnimeContent, params: [] },
+        { title: 'K-drama', data: [], fetchFunction: fetchKoreanContent, params: [] },
+        { title: 'Popular Movies', data: [], fetchFunction: fetchPopularMovies, params: [] },
+        { title: 'Trending Now', data: [], fetchFunction: fetchTrendings, params: [] },
+        { title: 'New Releases', data: [], fetchFunction: fetchCombinedNewReleases, params: [] },
+        { title: 'Action', data: [], fetchFunction: fetchMoviesByGenre, params: [MOVIE_GENRES.Action] },
+        { title: 'Comedy', data: [], fetchFunction: fetchMoviesByGenre, params: [MOVIE_GENRES.Comedy] },
+        { title: 'Drama', data: [], fetchFunction: fetchMoviesByGenre, params: [MOVIE_GENRES.Drama] },
+        { title: 'War', data: [], fetchFunction: fetchMoviesByGenre, params: [MOVIE_GENRES.War] },
+        { title: 'Horror', data: [], fetchFunction: fetchMoviesByGenre, params: [MOVIE_GENRES.Horror] },
     ]);
     const [error, setError] = useState(null);
 
+    const getRandomNumber = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
     useEffect(() => {
         const fetchDataForSection = async (section) => {
             try {
-                const data = await section.fetchFunction();
+                const data = await section.fetchFunction(...section.params);
+                const randomAmount = getRandomNumber(16, 20);
+                const limitedData = data.slice(0, randomAmount);
+
                 setSections(prevSections => prevSections.map(prevSection => {
                     if (prevSection.title === section.title) {
-                        return { ...prevSection, data: data };
+                        return { ...prevSection, data: limitedData };
                     }
                     return prevSection;
                 }));
             } catch (error) {
-                setError(error);                
+                setError(error);
             }
         };
 
