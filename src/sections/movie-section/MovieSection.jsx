@@ -6,16 +6,18 @@ import {
     fetchMovieDetails, 
     fetchCombinedNewReleases, 
     fetchActionMovies,
-    fetchAnimeContent } from "../../services/themoviedbApi";
+    fetchAnimeContent,
+    fetchKoreanContent } from "../../services/themoviedbApi";
 import styles from './MovieSection.module.css';
 
 function MovieSection() {
     const [sections, setSections] = useState([
+        { title: 'Anime', data: [], fetchFunction: fetchAnimeContent },
+        { title: 'K-drama', data: [], fetchFunction: fetchKoreanContent },
         { title: 'Popular Movies', data: [], fetchFunction: fetchPopularMovies },
         { title: 'Trending Now', data: [], fetchFunction: fetchTrendings },
         { title: 'New Releases', data: [], fetchFunction: fetchCombinedNewReleases},
         { title: 'Action', data: [], fetchFunction: fetchActionMovies },
-        { title: 'Anime', data: [], fetchFunction: fetchAnimeContent }
     ]);
     const [error, setError] = useState(null);
 

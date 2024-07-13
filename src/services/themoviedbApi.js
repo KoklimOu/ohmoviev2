@@ -97,6 +97,19 @@ export const fetchAnimeContent = async () => {
   }
 };
 
+export const fetchKoreanContent = async () => {
+  try {
+    const response = await axiosInstance.get('/discover/tv', {
+      params: {
+        with_original_language: 'ko',
+      },
+    });
+    return response.data.results;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const fetchMovieDetails = async (tmdbId) => {
   try {
     const response = await axiosInstance.get(`/movie/${tmdbId}`);
