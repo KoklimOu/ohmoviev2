@@ -13,7 +13,7 @@
     --bg_color: #121212;
     --border_color: #CCCCCC;
     --border_width: 1px;
-    --footer_color: #CCCCCC;
+    --footer_color: #222222;
   }
 
 html, body {
@@ -34,5 +34,5 @@ html, body {
 }
 
 .sectionSeparator {
-    height: 56px;
+    margin-bottom: 56px;
 }

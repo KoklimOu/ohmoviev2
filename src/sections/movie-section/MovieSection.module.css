@@ -1,5 +1,6 @@
 .movieContainer{
     padding: 0 16px;
+    background-color: var(--bg_color);
 }
 
 .movieContainer h2 {
