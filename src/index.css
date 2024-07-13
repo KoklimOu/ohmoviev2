@@ -5,6 +5,7 @@
     --bg_color: #fafafa;
     --border_color: #333333;
     --border_width: 1px;
+    --footer_color: #333333;
 }
 
 [data-theme="dark"] {
@@ -12,6 +13,7 @@
     --bg_color: #121212;
     --border_color: #CCCCCC;
     --border_width: 1px;
+    --footer_color: #CCCCCC;
   }
 
 html, body {

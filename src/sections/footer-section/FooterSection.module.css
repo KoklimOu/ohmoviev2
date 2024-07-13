@@ -1,0 +1,22 @@
+.footer {
+    background-color: var(--footer_color);
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo img {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+
+.copyright {
+    font-size: 14px;
+}

@@ -1,4 +1,5 @@
 import './App.css'
+import FooterSection from './sections/footer-section/FooterSection'
 import HeaderSection from './sections/header-section/HeaderSection'
 import MovieSection from './sections/movie-section/MovieSection'
 
@@ -8,6 +9,7 @@ function App() {
     <>
     <HeaderSection/>
      <MovieSection/>
+     <FooterSection/>
     </>
   )
 }
