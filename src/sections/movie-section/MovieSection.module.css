@@ -3,7 +3,6 @@
 }
 
 .movieContainer h2 {
-    margin-top:32px;
 }
 
 .firstItem {
@@ -17,24 +16,38 @@
 .firstItem img {
     width: 100%;
     height: auto;
-    opacity: 50%;
     object-fit: cover;
 }
 
-.overlayText {
+.overlay {
     position: absolute;
-    bottom: 32px;
-    left: 32px;
-    color: white;
-    padding: 8px;
-    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0) 100%
+    ); 
+    opacity: 50%;
 }
+
+.overlayText {
+    width: 55%;
+    position: absolute;
+    top: 50%;
+    bottom: 0;
+    color: white;
+    padding: 8px 32px;
+    border-radius: 4px;
+    
+}
+
 .overlayText h1 {
     font-size: 55px;
 }
 
 .overlayText p {
-    width: 55%;
     font-size: 30px;
 }
 
@@ -53,16 +66,13 @@
     transition: all ease 0.3s;
     opacity: 90%;
     border-radius: 1px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .moviesGrid img:hover {
     cursor: pointer;
     transform: scale(1.03); 
     box-shadow: 0 0 0 2px var(--border_color);
-}
-
-.sectionSaperator {
-    margin-top: 5%;
 }
 
 @media (max-width: 1500px) {

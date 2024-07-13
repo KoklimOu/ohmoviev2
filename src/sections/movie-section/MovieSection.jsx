@@ -73,13 +73,11 @@ function MovieSection() {
         fetchDetailById(tmdbId, mediaType);
     };
 
-    const renderSection = (section) => (
+    const renderSection = (section, index) => (
         <div key={section.title} className={styles.movieContainer}>
-
-            <div className={styles.sectionSaperator}></div>
-
-            {section.data.length > 0 && (
+            {(index > 0 && index % 2 === 0 && section.data.length > 0) && (
                 <div className={styles.firstItem} onClick={() => onClickCard(section.data[0].id, section.data[0].media_type)}>
+                    <div className={styles.overlay}></div>
                     <img src={`https://image.tmdb.org/t/p/original${section.data[0].backdrop_path}`} alt={section.data[0].title || section.data[0].name} />
                     <div className={styles.overlayText}>
                         <h1>{section.data[0].title || section.data[0].name}</h1>
@@ -87,11 +85,11 @@ function MovieSection() {
                     </div>
                 </div>
             )}
-
+    
             <h2>{section.title}</h2>
-
+    
             <ul className={styles.moviesGrid}>
-                {section.data.slice(1).map(item => (
+                {section.data.map(item => (
                     <img
                         key={item.id}
                         onClick={() => onClickCard(item.id, item.media_type)}
@@ -100,14 +98,18 @@ function MovieSection() {
                     />
                 ))}
             </ul>
+    
+            {(index > 0 && index % 2 === 1) && <div className='sectionSeparator'></div>}
         </div>
     );
-
+    
     return (
         <>
-            {sections.map(section => renderSection(section))}
+            {sections.map((section, index) => renderSection(section, index))}
         </>
     );
+    
+    
 }
 
 export default MovieSection;
