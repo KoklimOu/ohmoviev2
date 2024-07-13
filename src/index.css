@@ -1,12 +1,18 @@
 @import url(./assets/fonts/Fonts.css);
 
 :root {
-    --font_color: #fff;
-    --bg_color: #111111;
+    --font_color: #191919;
+    --bg_color: #fafafa;
+    --border_color: #333333;
+    --border_width: 1px;
+}
+
+[data-theme="dark"] {
+    --font_color: #E0E0E0;
+    --bg_color: #121212;
     --border_color: #CCCCCC;
     --border_width: 1px;
-    --bg_content: #cccccc15;
-}
+  }
 
 html, body {
     height: 100%;
@@ -23,4 +29,8 @@ html, body {
     flex-direction: column;
     margin: 0;
     padding: 0;
+}
+
+.sectionSeparator {
+    height: 56px;
 }
