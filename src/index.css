@@ -1,19 +1,19 @@
 @import url(./assets/fonts/Fonts.css);
 
 :root {
-    --font_color: #191919;
-    --bg_color: #fafafa;
-    --border_color: #333333;
-    --border_width: 1px;
-    --footer_color: #333333;
-}
-
-[data-theme="dark"] {
     --font_color: #E0E0E0;
     --bg_color: #121212;
-    --border_color: #CCCCCC;
+    --border_color: #cccccc30;
     --border_width: 1px;
-    --footer_color: #222222;
+    --footer_color: #111111;
+}
+
+[data-theme="light"] {
+    --font_color: #191919;
+    --bg_color: #fafafa;
+    --border_color: #33333330;
+    --border_width: 1px;
+    --footer_color: #333333;
   }
 
 html, body {
