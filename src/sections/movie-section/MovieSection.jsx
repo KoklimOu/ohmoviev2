@@ -25,6 +25,17 @@ function MovieSection() {
         { title: 'Horror', data: [], fetchFunction: fetchMoviesByGenre, params: [MOVIE_GENRES.Horror] },
     ]);
     const [error, setError] = useState(null);
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 600);
+
+    useEffect(() => {
+        const handleResize = () => {
+        setIsSmallScreen(window.innerWidth <= 600);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    
 
     const getRandomNumber = (min, max) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -79,14 +90,20 @@ function MovieSection() {
             <h2>{section.title}</h2>
     
             <ul className={styles.moviesGrid}>
-                {section.data.map(item => (
+                {section.data.map(item => {
+                    const imagePath = isSmallScreen
+                    ? `https://image.tmdb.org/t/p/w400${item.poster_path}`
+                    : `https://image.tmdb.org/t/p/w400${item.backdrop_path}`;
+
+                    return (
                     <img
                         key={item.id}
                         onClick={() => onClickCard(item.id, item.media_type)}
-                        src={`https://image.tmdb.org/t/p/w400${item.backdrop_path}`}
+                        src={imagePath}
                         alt={item.title || item.name}
                     />
-                ))}
+                    );
+                })}
             </ul>
 
             <div className="sectionSeparator"></div>
@@ -96,6 +113,7 @@ function MovieSection() {
     
     return (
         <>
+            <div className="sectionSeparator"></div>
             {sections.map((section, index) => renderSection(section, index))}
         </>
     );

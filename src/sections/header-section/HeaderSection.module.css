@@ -76,7 +76,10 @@
 
 
 @media (max-width: 600px) {
+    .heroImage {
+        height: 100vh;
+    }
     .welcome {
-        display: none;
+        width: 100%;
     }
 }

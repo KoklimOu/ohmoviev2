@@ -46,7 +46,6 @@ const HeaderSection = () => {
                 </div>
             </header>
 
-            <div className='sectionSeparator'></div>
         </>
     );
 }
