@@ -75,16 +75,6 @@ function MovieSection() {
 
     const renderSection = (section, index) => (
         <div key={section.title} className={styles.movieContainer}>
-            {(index > 0 && index % 2 === 0 && section.data.length > 0) && (
-                <div className={styles.firstItem} onClick={() => onClickCard(section.data[0].id, section.data[0].media_type)}>
-                    <div className={styles.overlay}></div>
-                    <img src={`https://image.tmdb.org/t/p/original${section.data[0].backdrop_path}`} alt={section.data[0].title || section.data[0].name} />
-                    <div className={styles.overlayText}>
-                        <h1>{section.data[0].title || section.data[0].name}</h1>
-                        <p>{section.data[0].overview}</p>
-                    </div>
-                </div>
-            )}
     
             <h2>{section.title}</h2>
     
@@ -93,13 +83,14 @@ function MovieSection() {
                     <img
                         key={item.id}
                         onClick={() => onClickCard(item.id, item.media_type)}
-                        src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                        src={`https://image.tmdb.org/t/p/w400${item.backdrop_path}`}
                         alt={item.title || item.name}
                     />
                 ))}
             </ul>
+
+            <div className="sectionSeparator"></div>
     
-            {(index > 0 && index % 2 === 1) && <div className='sectionSeparator'></div>}
         </div>
     );
     
