@@ -9,7 +9,7 @@
     justify-content: end;
     align-items: center;
     position: absolute;
-    right: 16px;
+    right: 8px;
 }
 
 .modeIcon {
@@ -46,6 +46,7 @@
     list-style: none;
     display: flex;
     align-items: center;
+    padding-left: 8px;
 }
 
 .logo img {
@@ -56,9 +57,9 @@
 
 .logo a {
     text-decoration: none;
-    color: white;
+    color: rgb(233, 233, 233);
     font-weight: lighter;
-    font-size: 1rem;
+    font-size: 14px;
     padding-right: 2em;
 }
 
@@ -73,12 +74,9 @@
     max-width: 80%; /* Limit width to avoid stretching */
 }
 
-.welcome h1 {
-    font-size: 2.5rem; /* Adjust heading font size */
-    margin-bottom: 1rem;
-}
 
-.welcome p {
-    max-width: 750px;
-    font-size: 1rem; /* Adjust paragraph font size */
+@media (max-width: 600px) {
+    .welcome {
+        display: none;
+    }
 }
