@@ -15,11 +15,25 @@ jobs:
 
       - name: Install AWS CLI
         run: |
+          # Install dependencies for AWS CLI v2
           sudo apt update
-          sudo apt install awscli -y
+          sudo apt install -y unzip curl
+
+          # Download the AWS CLI v2 installation package
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          
+          # Unzip the package
+          unzip awscliv2.zip
+          
+          # Install AWS CLI
+          sudo ./aws/install
+
+          # Verify the installation
+          aws --version
 
       - name: Deploy to S3
         run: |
+          # Sync the files to your S3 bucket
           aws s3 sync ./dist s3://ohmovie2v --delete
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
