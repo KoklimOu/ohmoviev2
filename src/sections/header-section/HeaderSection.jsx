@@ -30,7 +30,6 @@ const HeaderSection = () => {
                 <nav className={styles.nav}>
                     <ul className={styles.logo}>
                         <li><a href="">OhMovie!</a></li>
-                        <li><a href="">Search</a></li>
                     </ul>
                     <div className={styles.mode} onClick={toggleMode}>
                         <FontAwesomeIcon className={styles.modeIcon} icon={faSun} title='light'/>

@@ -13,6 +13,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Specify your Node.js version here
+
+      - name: Install dependencies
+        run: |
+          npm install # Install dependencies
+
+      - name: Run build
+        run: |
+          npm run build # Build your project
+
       - name: Set up AWS CLI v2
         uses: aws-actions/configure-aws-credentials@v2
         with:
